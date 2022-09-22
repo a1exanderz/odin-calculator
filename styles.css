@@ -1,0 +1,75 @@
+* {
+  font-size: 16px;
+  font-family: Verdana, sans-serif;
+}
+
+button {
+  border: none;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calculator-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  outline: 1px solid rgb(131, 131, 131);
+  height: 560px;
+  width: 400px;
+  border-radius: 10px;
+}
+
+#outputScreen {
+  height: 100px;
+  width: 340px;
+  text-align: center;
+  margin: 20px;
+  background-color: rgb(234, 234, 234);
+  border: 1px solid rgb(185, 185, 185);
+  border-radius: 10px;
+}
+
+.removeButtons {
+  display: flex;
+  height: 60px;
+  width: 380px;
+  margin: 0px 20px;
+  text-align: center;
+  justify-content: space-evenly;
+}
+
+#clearButton {
+  outline: 1px solid rgb(185, 185, 185);
+  width: 160px;
+  background-color: rgb(255, 220, 104);
+  border-radius: 5px;
+}
+
+#deleteButton {
+  outline: 1px solid rgb(185, 185, 185);
+  width: 160px;
+  background-color: rgb(150, 209, 255);
+  border-radius: 5px;
+}
+
+.buttonGrid {
+  display: grid;
+  height: auto;
+  margin: 15px;
+  grid-template-rows: repeat(4, 80px);
+  grid-template-columns: repeat(4, 90px);
+}
+
+.operationButton {
+  outline: 1px solid rgb(185, 185, 185);
+  margin: 10px;
+  border-radius: 5px;
+}
