@@ -9,6 +9,8 @@ button {
 
 button:hover {
   cursor: pointer;
+  background-color: rgb(0, 0, 0);
+  color: white;
 }
 
 body {
@@ -29,20 +31,39 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: white;
   outline: 1px solid rgb(131, 131, 131);
   height: 560px;
   width: 400px;
   border-radius: 10px;
+  box-shadow: 5px 5px 5px darkgray;
 }
 
-#outputScreen {
+.outputScreen {
+  display: flex;
+  flex-direction: column;
   height: 100px;
-  width: 340px;
-  text-align: center;
+  width: 320px;
+  padding: 0px 10px;
   margin: 20px;
   background-color: rgb(234, 234, 234);
   border: 1px solid rgb(185, 185, 185);
   border-radius: 10px;
+}
+
+#topOutput {
+  display: flex;
+  height: 30px;
+  justify-content: end;
+  align-items: center;
+}
+
+#bottomOutput {
+  display: flex;
+  height: 70px;
+  font-size: 32px;
+  justify-content: end;
+  align-items: center;
 }
 
 .removeButtons {
@@ -57,15 +78,23 @@ body {
 #clearButton {
   outline: 1px solid rgb(185, 185, 185);
   width: 160px;
-  background-color: rgb(255, 220, 104);
+  background-color: rgb(255, 230, 146);
   border-radius: 5px;
+}
+
+#clearButton:hover {
+  background-color: rgb(0, 0, 0);
 }
 
 #deleteButton {
   outline: 1px solid rgb(185, 185, 185);
   width: 160px;
-  background-color: rgb(150, 209, 255);
+  background-color: rgb(161, 211, 250);
   border-radius: 5px;
+}
+
+#deleteButton:hover {
+  background-color: rgb(0, 0, 0);
 }
 
 .buttonGrid {
@@ -80,7 +109,4 @@ body {
   outline: 1px solid rgb(185, 185, 185);
   margin: 10px;
   border-radius: 5px;
-}
-
-footer {
 }

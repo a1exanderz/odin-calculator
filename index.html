@@ -10,31 +10,35 @@
   <body>
     <div class="calculator-container">
       <div class="calculator-outline">
-        <div id="outputScreen"></div>
+        <div class="outputScreen">
+          <div id="topOutput"></div>
+          <div id="bottomOutput"></div>
+        </div>
         <div class="removeButtons">
           <button id="clearButton">CLEAR</button>
           <button id="deleteButton">DELETE</button>
         </div>
         <div class="buttonGrid">
-          <button class="operationButton">7</button>
-          <button class="operationButton">8</button>
-          <button class="operationButton">9</button>
-          <button class="operationButton">/</button>
-          <button class="operationButton">4</button>
-          <button class="operationButton">5</button>
-          <button class="operationButton">6</button>
-          <button class="operationButton">*</button>
-          <button class="operationButton">1</button>
-          <button class="operationButton">2</button>
-          <button class="operationButton">3</button>
-          <button class="operationButton">-</button>
-          <button class="operationButton">.</button>
-          <button class="operationButton">0</button>
-          <button class="operationButton">=</button>
-          <button class="operationButton">+</button>
+          <button class="operationButton" id="7">7</button>
+          <button class="operationButton" id="8">8</button>
+          <button class="operationButton" id="9">9</button>
+          <button class="operationButton" id="divide">&#247;</button>
+          <button class="operationButton" id="4">4</button>
+          <button class="operationButton" id="5">5</button>
+          <button class="operationButton" id="6">6</button>
+          <button class="operationButton" id="multiply">&#215;</button>
+          <button class="operationButton" id="1">1</button>
+          <button class="operationButton" id="2">2</button>
+          <button class="operationButton" id="3">3</button>
+          <button class="operationButton" id="subtract">&#8722;</button>
+          <button class="operationButton" id="decimal">.</button>
+          <button class="operationButton" id="0">0</button>
+          <button class="operationButton" id="computeOperation">=</button>
+          <button class="operationButton" id="add">&#43;</button>
         </div>
       </div>
     </div>
     <footer>Copyright &copy; a1exanderz</footer>
+    <script src="script.js"></script>
   </body>
 </html>
