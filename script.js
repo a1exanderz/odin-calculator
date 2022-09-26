@@ -1,4 +1,8 @@
 let currentEntry = "0";
+let valueOne = null;
+let valueTwo = null;
+let operation = null;
+
 const bottomOutput = document.getElementById("bottomOutput");
 const topOutput = document.getElementById("topOutput");
 
@@ -6,6 +10,9 @@ const topOutput = document.getElementById("topOutput");
 const clear = document.getElementById("clearButton");
 clear.onclick = () => {
   currentEntry = "0";
+  valueOne = null;
+  valueTwo = null;
+  operation = null;
   updateTopOutput(null, null);
   updateBottomOutput();
 };
@@ -23,72 +30,106 @@ const eight = document.getElementById("8");
 const nine = document.getElementById("9");
 
 zero.onclick = () => {
-  addToComputation("0");
+  addToNumber("0");
 };
 one.onclick = () => {
-  addToComputation("1");
+  addToNumber("1");
 };
 two.onclick = () => {
-  addToComputation("2");
+  addToNumber("2");
 };
 three.onclick = () => {
-  addToComputation("3");
+  addToNumber("3");
 };
 four.onclick = () => {
-  addToComputation("4");
+  addToNumber("4");
 };
 five.onclick = () => {
-  addToComputation("5");
+  addToNumber("5");
 };
 six.onclick = () => {
-  addToComputation("6");
+  addToNumber("6");
 };
 seven.onclick = () => {
-  addToComputation("7");
+  addToNumber("7");
 };
 eight.onclick = () => {
-  addToComputation("8");
+  addToNumber("8");
 };
 nine.onclick = () => {
-  addToComputation("9");
+  addToNumber("9");
 };
 
-// Operations
+// Computation operations
 const divide = document.getElementById("divide");
 const multiply = document.getElementById("multiply");
 const subtract = document.getElementById("subtract");
 const add = document.getElementById("add");
 
 divide.onclick = () => {
-  addToComputation("/");
+  addComputation("/");
 };
 multiply.onclick = () => {
-  addToComputation("*");
+  addComputation("*");
 };
 subtract.onclick = () => {
-  addToComputation("-");
+  addComputation("-");
 };
 add.onclick = () => {
-  addToComputation("+");
+  addComputation("+");
 };
 
-///////
-function addToComputation(stringValue) {
+// Make computation
+const compute = document.getElementById("computeOperation");
+
+compute.onclick = () => {
+  makeComputation(currentEntry);
+};
+
+///
+function addToNumber(stringValue) {
   if (currentEntry === "0") {
+    console.log("new num");
     currentEntry = stringValue;
-  }
-  if (
-    stringValue === "/" ||
-    stringValue === "*" ||
-    stringValue === "+" ||
-    stringValue === "-"
-  ) {
-    updateTopOutput(currentEntry, stringValue);
-    currentEntry = 0;
   } else {
-    currentEntry += stringValue;
+    console.log("append num");
+    if (currentEntry.length <= 11) {
+      currentEntry += stringValue;
+    }
   }
   updateBottomOutput();
+}
+
+function addComputation(stringValue) {
+  updateTopOutput(currentEntry, stringValue);
+
+  if (!valueTwo) {
+    valueOne = currentEntry;
+  } else {
+    valueOne = bottomOutput.textContent;
+    updateTopOutput(valueOne, stringValue);
+  }
+
+  operation = stringValue;
+  currentEntry = "0";
+  compute.disabled = false;
+  console.log(valueOne, operation, valueTwo);
+}
+
+function makeComputation(stringValue) {
+  topOutput.textContent += ` ${bottomOutput.textContent} =`;
+  valueTwo = stringValue;
+  if (operation === "+") {
+    bottomOutput.textContent = parseInt(valueOne) + parseInt(valueTwo);
+  } else if (operation === "-") {
+    bottomOutput.textContent = valueOne - valueTwo;
+  } else if (operation === "*") {
+    bottomOutput.textContent = valueOne * valueTwo;
+  } else if (operation === "/") {
+    bottomOutput.textContent = valueOne / valueTwo;
+  }
+  compute.disabled = true;
+  console.log(valueOne, operation, valueTwo);
 }
 
 function updateTopOutput(entry, operation) {
@@ -107,3 +148,9 @@ function updateBottomOutput() {
 window.onload = () => {
   bottomOutput.textContent = currentEntry;
 };
+
+// user inputs number onto bottomScreen
+//  can contain only 1 decimal, 1 decimal disables rest
+// when operation is pressed, number is sent to topScreen, with operation next to it
+//  all other operations including = are now disabled
+// enter a new number at the bottomScreen and press enter to compute operation
