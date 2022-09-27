@@ -1,3 +1,3 @@
 # odin-calculator
-Calculator project from The Odin Project
+Calculator project from The Odin Project \n
 Link to project [here](https://a1exanderz.github.io/odin-calculator/)
