@@ -9,13 +9,30 @@ const topOutput = document.getElementById("topOutput");
 // Clear and delete buttons
 const clear = document.getElementById("clearButton");
 clear.onclick = () => {
+  clearAll();
+};
+function clearAll() {
   currentEntry = "0";
   valueOne = null;
   valueTwo = null;
   operation = null;
+  decimal.disabled = false;
   updateTopOutput(null, null);
   updateBottomOutput();
+}
+
+const del = document.getElementById("deleteButton");
+del.onclick = () => {
+  deleteOne();
 };
+function deleteOne() {
+  if (currentEntry.length !== 1) {
+    currentEntry = currentEntry.slice(0, -1);
+  } else {
+    currentEntry = "0";
+  }
+  updateBottomOutput();
+}
 
 // All digits
 const zero = document.getElementById("0");
@@ -60,6 +77,12 @@ nine.onclick = () => {
   addToNumber("9");
 };
 
+// Decimal
+const decimal = document.getElementById("decimal");
+decimal.onclick = () => {
+  addToNumber(".");
+};
+
 // Computation operations
 const divide = document.getElementById("divide");
 const multiply = document.getElementById("multiply");
@@ -81,14 +104,17 @@ add.onclick = () => {
 
 // Make computation
 const compute = document.getElementById("computeOperation");
-
 compute.onclick = () => {
   makeComputation(currentEntry);
 };
 
 ///
 function addToNumber(stringValue) {
-  if (currentEntry === "0") {
+  compute.disabled = false;
+  if (stringValue == ".") {
+    decimal.disabled = true;
+  }
+  if (currentEntry === "0" && stringValue !== ".") {
     console.log("new num");
     currentEntry = stringValue;
   } else {
@@ -101,8 +127,8 @@ function addToNumber(stringValue) {
 }
 
 function addComputation(stringValue) {
+  compute.disabled = true;
   updateTopOutput(currentEntry, stringValue);
-
   if (!valueTwo) {
     valueOne = currentEntry;
   } else {
@@ -112,7 +138,7 @@ function addComputation(stringValue) {
 
   operation = stringValue;
   currentEntry = "0";
-  compute.disabled = false;
+  decimal.disabled = false;
   console.log(valueOne, operation, valueTwo);
 }
 
@@ -120,9 +146,12 @@ function makeComputation(stringValue) {
   topOutput.textContent += ` ${bottomOutput.textContent} =`;
   valueTwo = stringValue;
   if (operation === "+") {
-    bottomOutput.textContent = parseInt(valueOne) + parseInt(valueTwo);
+    bottomOutput.textContent =
+      Math.round((parseInt(valueOne) + parseInt(valueTwo)) * 10000000) /
+      10000000;
   } else if (operation === "-") {
-    bottomOutput.textContent = valueOne - valueTwo;
+    bottomOutput.textContent =
+      Math.round((valueOne - valueTwo) * 10000000) / 10000000;
   } else if (operation === "*") {
     bottomOutput.textContent =
       Math.round(valueOne * valueTwo * 10000000) / 10000000;
@@ -146,10 +175,23 @@ function updateBottomOutput() {
   bottomOutput.textContent = currentEntry;
 }
 
+function handleKeyboardInput(e) {
+  if (e.key === "Escape") clearAll();
+  if (e.key === "Backspace") deleteOne();
+  if (e.key >= 0 && e.key <= 9) addToNumber(e.key);
+  if (e.key === "/" || e.key === "*" || e.key === "-" || e.key === "+") {
+    addComputation(e.key);
+  }
+  if (e.key === ".") addToNumber(e.key);
+  if (e.key === "Enter") makeComputation(currentEntry);
+}
+
 /////
 window.onload = () => {
   bottomOutput.textContent = currentEntry;
 };
+
+window.addEventListener("keydown", handleKeyboardInput);
 
 // user inputs number onto bottomScreen
 //  can contain only 1 decimal, 1 decimal disables rest
