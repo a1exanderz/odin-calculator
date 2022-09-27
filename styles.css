@@ -3,6 +3,11 @@
   font-family: Verdana, sans-serif;
 }
 
+a {
+  text-decoration: none;
+  color: lightcoral;
+}
+
 button {
   border: none;
 }
