@@ -124,9 +124,11 @@ function makeComputation(stringValue) {
   } else if (operation === "-") {
     bottomOutput.textContent = valueOne - valueTwo;
   } else if (operation === "*") {
-    bottomOutput.textContent = valueOne * valueTwo;
+    bottomOutput.textContent =
+      Math.round(valueOne * valueTwo * 10000000) / 10000000;
   } else if (operation === "/") {
-    bottomOutput.textContent = valueOne / valueTwo;
+    bottomOutput.textContent =
+      Math.round((valueOne / valueTwo) * 10000000) / 10000000;
   }
   compute.disabled = true;
   console.log(valueOne, operation, valueTwo);
